@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Hiberusb_Carrerob::js/hidemarks.js"></script>
+        <script src="Hiberusb_Carrerob::js/maxnote.js"></script>
+    </head>
+</page>

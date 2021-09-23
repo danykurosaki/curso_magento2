@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="carrero" sortOrder="999" translate="label">
+            <label>Carrero</label>
+        </tab>
+        <section id="carrero_proyecto" showInDefault="1" sortOrder="10">
+            <label>Configuracion parametros</label>
+            <tab>carrero</tab>
+            <resource>Carrero_Curso::config</resource>
+            <group id="general" showInDefault="1" sortOrder="10">
+                <label>Texto</label>
+                <field id="texto_general" type="text" sortOrder="10" showInDefault="1">
+                    <label>Texto</label>
+                </field>
+            </group>
+            <group id="generalDos" showInDefault="1" sortOrder="10">
+                <label>Numero</label>
+                <field id="numero_general" type="text" sortOrder="9" showInDefault="1">
+                    <validate>integer</validate>
+                    <label>Numero</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

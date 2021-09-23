@@ -1,0 +1,28 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="product_plugin" type="Hiberus\Curso\Plugin\Catalog\ProductPlugin" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Framework\Pricing\Render\Amount">
+        <plugin name="product_price" type="Hiberus\Curso\Plugin\Pricing\AmountPlugin" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="comando_autor" xsi:type="object">
+                    Hiberus\Curso\Console\AuthorsCommand
+                </item>
+            </argument>
+        </arguments>
+    </type>
+<!--    <type name="Magento\Framework\App\RouterList">-->
+<!--        <arguments>-->
+<!--            <argument name="routerList" xsi:type="array">-->
+<!--                <item name="routingExample" xsi:type="array">-->
+<!--                    <item name="class" xsi:type="string">ExampleCorp\RoutingExample\Controller\Router</item>-->
+<!--                    <item name="disable" xsi:type="boolean">false</item>-->
+<!--                    <item name="sortOrder" xsi:type="string">40</item>-->
+<!--                </item>-->
+<!--            </argument>-->
+<!--        </arguments>-->
+<!--    </type>-->
+</config>

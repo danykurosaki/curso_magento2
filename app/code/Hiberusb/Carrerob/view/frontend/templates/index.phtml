@@ -1,0 +1,19 @@
+<?php
+/**
+* @var \Hiberusb\Carrerob\Block\Index $block
+*/
+$alumnos = $block->getAlumnos();
+?>
+<h2 class="title">Listado notas</h2>
+<div id="studentList">
+    <ul>
+        <?php foreach($alumnos as $row){?>
+            <li><?php echo $row['firstname']. " ".$row['lastname']." <span class='mark'>".$row['mark']."</span>" ?></li>
+        <?php } ?>
+        <li><?=__('Average mark: %1',$block->getMedia($alumnos))?></li>
+    </ul>
+</div>
+<p> <?=__('Total number of students: %1',count($alumnos))?></p>
+<input type="hidden" id="maxMarkData" value="<?= $block->getMax($alumnos) ?>"/>
+<input type="button" id="hideList" value="Hide list" />
+<input type="button" id="maxMark" value="Max mark" />
