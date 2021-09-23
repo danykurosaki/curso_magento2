@@ -24,9 +24,11 @@ class CarrerobPlugin{
         \Hiberusb\Carrerob\Block\Index $subject,
         $result
     ){
+        $minMark=$this->scopeConfig->getValue('hiberus_proyecto/general/min_mark');
+
         foreach($result as $key=>$row){
-            if($row['mark']<5){
-                $result[$key]['mark']=4.9;
+            if($row['mark']<$minMark){
+                $result[$key]['mark']=$minMark-0.1;
             }
         }
         return $result;

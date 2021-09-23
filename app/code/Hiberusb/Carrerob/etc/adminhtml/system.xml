@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="hiberus" sortOrder="999" translate="label">
+            <label>Hiberus</label>
+        </tab>
+        <section id="hiberus_proyecto" showInDefault="1" sortOrder="10">
+            <label>Configuracion parametros</label>
+            <tab>hiberus</tab>
+            <resource>Hiberusb_Carrerob::config</resource>
+            <group id="general" showInDefault="1" sortOrder="10">
+                <label>Maximo elementos</label>
+                <field id="max_elements" type="text" sortOrder="10" showInDefault="1">
+                    <validate>integer</validate>
+                    <label>Maximo elementos</label>
+                </field>
+                <field id="min_mark" type="text" sortOrder="11" showInDefault="1">
+                    <validate>integer</validate>
+                    <label>Nota minima</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
