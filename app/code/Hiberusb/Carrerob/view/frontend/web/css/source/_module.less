@@ -1,0 +1,18 @@
+@import '_mixin.less';
+@margin-left-primary:20px;
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+    .title{
+        color:green;
+        font-weight: bold;
+
+    }
+}
+& when (@media-common = true) {
+    .title {
+        color: blue;
+        font-weight: bold;
+    }
+    li:nth-child(odd) {
+        margin-left: @margin-left-primary;
+    }
+}
