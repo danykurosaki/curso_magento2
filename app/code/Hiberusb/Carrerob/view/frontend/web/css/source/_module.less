@@ -1,10 +1,10 @@
 @import '_mixin.less';
+
 @margin-left-primary:20px;
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
     .title{
         color:green;
         font-weight: bold;
-
     }
 }
 & when (@media-common = true) {
@@ -12,7 +12,29 @@
         color: blue;
         font-weight: bold;
     }
+
     li:nth-child(odd) {
         margin-left: @margin-left-primary;
     }
+
+    .list-group-item {
+        position: relative;
+        display: block;
+        padding: .5rem 1rem;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .125);
+    }
+
+        li.pass{
+                .pass(#88cb4e);
+        }
+         li.fail {
+             .fail(#9f0202);
+         }
+    .list-group-item-primary {
+        color: #084298;
+        background-color: #cfe2ff;
+    }
+
 }

@@ -5,10 +5,11 @@
 $alumnos = $block->getAlumnos();
 ?>
 <h2 class="title">Listado notas</h2>
-<div id="studentList">
+<div id="studentList list-group-item">
     <ul>
         <?php foreach($alumnos as $row){?>
-            <li><?php echo $row['firstname']. " ".$row['lastname']." <span class='mark'>".$row['mark']."</span>" ?></li>
+            <?php $style=$row['mark']>5 ? "pass" : "fail" ?>
+            <li class="list-group-item <?=$style?>"><?php echo $row['firstname']. " ".$row['lastname']." <span class='mark'>".$row['mark']."</span>" ?></li>
         <?php } ?>
         <li><?=__('Average mark: %1',$block->getMedia($alumnos))?></li>
     </ul>
