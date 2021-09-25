@@ -33,7 +33,7 @@ class AddData implements DataPatchInterface
        // $setup = $this->moduleDataSetup;
 
         foreach ($data as $key=>$row) {
-            array_push($row,mt_rand(0*100,20*100)/100);
+            array_push($row,mt_rand(0*100,10*100)/100);
             $data[$key]=$row;
         }
         $this->moduleDataSetup->getConnection()->insertArray(
