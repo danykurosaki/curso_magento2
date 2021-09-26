@@ -38,7 +38,6 @@ class Index extends Template{
 
     public function getAlumnos() {
         $pageSize=$this->scopeConfig->getValue('hiberus_proyecto/general/max_elements');
-
         $collection = $this->curso->getCollection()->setPageSize($pageSize);
         return $collection->getData();
     }
@@ -59,5 +58,16 @@ class Index extends Template{
             }
         }
         return $maxMark;
+    }
+    public function getTop(){
+        $topTres = array();
+        $collection = $this->curso->getCollection()
+            ->setOrder('mark','DESC')
+            ->getData();
+        $topTresFull = array_slice($collection, 0, 3);
+        foreach ($topTresFull as $row){
+            $topTres[]=$row['id_exam'];
+        }
+        return $topTres;
     }
 }

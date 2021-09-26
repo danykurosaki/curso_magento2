@@ -12,6 +12,7 @@ class CarreroRepository implements CarreroRepositoryInterface
 
     protected ResourceModel\Carrerob $resourceCurso;
     protected \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $cursoInterfaceFactory;
+    protected Carrerob $carrerob;
 
     /**
      * @param ResourceModel\Carrerob $resourceCurso
@@ -19,10 +20,12 @@ class CarreroRepository implements CarreroRepositoryInterface
      */
     public function __construct(
         \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $resourceCurso,
-        \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $carreroInterfaceFactory
+        \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $carreroInterfaceFactory,
+        Carrerob $carrerob
     ) {
         $this->resourceCurso = $resourceCurso;
         $this->cursoInterfaceFactory = $carreroInterfaceFactory;
+        $this->carrerob = $carrerob;
     }
 
     /**
@@ -90,23 +93,26 @@ class CarreroRepository implements CarreroRepositoryInterface
      */
     public function getAll()
     {
-        $connection  = $this->resourceCurso->getConnection();
-        $tableName = $connection->getTableName('hiberus_exam');
-
-        $query = $connection->select()
-            ->from($tableName);
-
-        $fetchData = $connection->fetchAll($query);
-        return json_encode($fetchData);
+        return $this->carrerob->getCollection()->getData();
     }
 
     /**
      * @inerhitDoc
      */
     public function removeByIdApi($entityId) {
-       // die(var_dump($this->_request->getParams()));
-        $status = $this->deleteById($entityId);
-        return json_encode($status);
+        //$this->carrerob->getCollection()->removeItemByKey($entityId);
+       // $status = $this->deleteById($entityId);
+        try {
+            $curso = $this->cursoInterfaceFactory->create();
+            $curso->load($entityId);
+            $curso->delete();
+            $status=true;
+        } catch (\Exception $e) {
+            $curso = $this->cursoInterfaceFactory->create();
+            $status=false;
+        }
+
+        return $status;
     }
 
     /**
