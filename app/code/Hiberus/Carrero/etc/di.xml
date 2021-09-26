@@ -1,5 +1,42 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="carrero_plugin" type="Hiberus\Carrero\Plugin\Catalog\ProductPlugin" sortOrder="10" disabled="false"  />
+    <preference for="Hiberus\Carrero\Api\Data\CarreroInterface" type="Hiberus\Carrero\Model\Carrerob"/>
+    <preference for="Hiberus\Carrero\Api\CarreroRepositoryInterface" type="Hiberus\Carrero\Model\CarreroRepository"/>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Hiberus\Carrero\Api\Data\CarreroInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="const">Hiberus\Carrero\Api\Data\CarreroInterface::TABLE_NAME</item>
+                    <item name="identifierField" xsi:type="const">Hiberus\Carrero\Api\Data\CarreroInterface::COLUMN_ID</item>
+                </item>
+            </argument>
+        </arguments>
     </type>
+    <type name="Hiberus\Carrero\Block\Index">
+        <plugin name="carrerob_plugin" type="Hiberus\Carrero\Plugin\Carrerob\CarrerobPlugin" sortOrder="10" disabled="false"  />
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="comando_examen" xsi:type="object">Hiberus\Carrero\Console\ExamCommand</item>
+            </argument>
+        </arguments>
+    </type>
+<!--    <virtualType name="Hiberus\Carrero\Model" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/hiberus_carrero.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento\Payment\Model\Method\MyCustomLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Magento\Payment\Model\Method\MyCustomDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento\Payment\Model\Method\MyCustomLogger</argument>
+        </arguments>
+    </type>-->
+
 </config>
