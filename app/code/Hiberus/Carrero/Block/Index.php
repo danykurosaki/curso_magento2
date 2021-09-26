@@ -9,6 +9,7 @@ use Magento\Framework\View\Element\Template;
 use Hiberus\Carrero\Api\Data\CarreroInterfaceFactory;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
+use Psr\Log\LoggerInterface;
 
 class Index extends Template{
     protected Registry $registry;
@@ -17,6 +18,7 @@ class Index extends Template{
     protected CarreroInterfaceFactory $carreroInterfaceFactory;
     protected \Hiberus\Carrero\Model\ResourceModel\Carrerob $carreroResource;
     protected ScopeConfigInterface $scopeConfig;
+    protected LoggerInterface $log;
 
     public function __construct(
         Context $context,
@@ -26,7 +28,8 @@ class Index extends Template{
         CarreroInterfaceFactory $carreroInterfaceFactory,
         \Hiberus\Carrero\Model\ResourceModel\Carrerob $carreroResource,
         array $data = [],
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        LoggerInterface $log
     ) {
         $this->registry = $registry;
         $this->carrerob = $carrerob;
@@ -34,6 +37,7 @@ class Index extends Template{
         $this->cursoInterfaceFactory = $carreroInterfaceFactory;
         $this->cursoResource = $carreroResource;
         $this->scopeConfig = $scopeConfig;
+        $this->log = $log;
         parent::__construct($context, $data);
     }
 
@@ -43,6 +47,7 @@ class Index extends Template{
     public function getAlumnos() {
         $pageSize=$this->scopeConfig->getValue('hiberus_proyecto/general/max_elements');
         $collection = $this->carrerob->getCollection()->setPageSize($pageSize);
+        $this->log->info("fff");
         return $collection->getData();
     }
 

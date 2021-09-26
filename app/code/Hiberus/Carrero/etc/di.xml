@@ -21,22 +21,24 @@
             </argument>
         </arguments>
     </type>
-<!--    <virtualType name="Hiberus\Carrero\Model" type="Magento\Framework\Logger\Handler\Base">
+    <!-- Logger -->
+    <virtualType name="Hiberus\Carrero\Logger\SampleDebug" type="Magento\Framework\Logger\Handler\Base">
         <arguments>
             <argument name="fileName" xsi:type="string">/var/log/hiberus_carrero.log</argument>
         </arguments>
     </virtualType>
-    <virtualType name="Magento\Payment\Model\Method\MyCustomLogger" type="Magento\Framework\Logger\Monolog">
+
+    <virtualType name="Hiberus\Carrero\Logger\Monolog" type="Magento\Framework\Logger\Monolog">
         <arguments>
             <argument name="handlers" xsi:type="array">
-                <item name="debug" xsi:type="object">Magento\Payment\Model\Method\MyCustomDebug</item>
+                <item name="debug" xsi:type="object">Hiberus\Carrero\Logger\SampleDebug</item>
             </argument>
         </arguments>
     </virtualType>
-    <type name="Magento\Payment\Model\Method\Logger">
-        <arguments>
-            <argument name="logger" xsi:type="object">Magento\Payment\Model\Method\MyCustomLogger</argument>
-        </arguments>
-    </type>-->
 
+    <type name="Hiberus\Carrero\Logger\SampleLogger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Hiberus\Carrero\Logger\Monolog</argument>
+        </arguments>
+    </type>
 </config>
