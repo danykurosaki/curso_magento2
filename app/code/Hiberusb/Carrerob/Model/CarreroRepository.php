@@ -10,21 +10,21 @@ use \Magento\Framework\App\RequestInterface;
 class CarreroRepository implements CarreroRepositoryInterface
 {
 
-    protected ResourceModel\Carrerob $resourceCurso;
-    protected \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $cursoInterfaceFactory;
+    protected ResourceModel\Carrerob $carreroResource;
+    protected \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $carreroInterfaceFactory;
     protected Carrerob $carrerob;
 
     /**
-     * @param ResourceModel\Carrerob $resourceCurso
-     * @param \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $cursoInterfaceFactory
+     * @param ResourceModel\Carrerob $carreroResource
+     * @param \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $carreroInterfaceFactory
      */
     public function __construct(
-        \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $resourceCurso,
+        \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $resourceCarrero,
         \Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory $carreroInterfaceFactory,
         Carrerob $carrerob
     ) {
-        $this->resourceCurso = $resourceCurso;
-        $this->cursoInterfaceFactory = $carreroInterfaceFactory;
+        $this->resourceCarrero = $resourceCarrero;
+        $this->carreroInterfaceFactory = $carreroInterfaceFactory;
         $this->carrerob = $carrerob;
     }
 
@@ -38,7 +38,7 @@ class CarreroRepository implements CarreroRepositoryInterface
     ) {
 
         try {
-            $this->resourceCurso->save($curso);
+            $this->resourceCarrero->save($curso);
         } catch(\Exception $e) {
             throw new CouldNotSaveException(__($e->getMessage()));
         }
@@ -54,11 +54,11 @@ class CarreroRepository implements CarreroRepositoryInterface
     public function getById($entityId)
     {
         try {
-            $curso = $this->cursoInterfaceFactory->create();
+            $curso = $this->carreroInterfaceFactory->create();
             $curso->setEntityId($entityId);
-            $this->resourceCurso->load($curso, $entityId);
+            $this->resourceCarrero->load($curso, $entityId);
         } catch (\Exception $e) {
-            $curso = $this->cursoInterfaceFactory->create();
+            $curso = $this->carreroInterfaceFactory->create();
         }
 
         return $curso;
@@ -71,7 +71,7 @@ class CarreroRepository implements CarreroRepositoryInterface
     public function delete(\Hiberusb\Carrerob\Api\Data\CarreroInterface $curso)
     {
         try {
-            $this->resourceCurso->delete($curso);
+            $this->resourceCarrero->delete($curso);
         } catch (\Exception $e) {
 
             return false;
@@ -103,12 +103,12 @@ class CarreroRepository implements CarreroRepositoryInterface
         //$this->carrerob->getCollection()->removeItemByKey($entityId);
        // $status = $this->deleteById($entityId);
         try {
-            $curso = $this->cursoInterfaceFactory->create();
+            $curso = $this->carreroInterfaceFactory->create();
             $curso->load($entityId);
             $curso->delete();
             $status=true;
         } catch (\Exception $e) {
-            $curso = $this->cursoInterfaceFactory->create();
+            $curso = $this->carreroInterfaceFactory->create();
             $status=false;
         }
 
@@ -119,7 +119,7 @@ class CarreroRepository implements CarreroRepositoryInterface
      * @inerhitDoc
      */
     public function createNew($firstname, $lastname, $mark) {
-        $connection  = $this->resourceCurso->getConnection();
+        $connection  = $this->resourceCarrero->getConnection();
         $tableName = $connection->getTableName('hiberus_exam');
         $sql = "INSERT INTO " . $tableName . " (firstname, lastname,mark) VALUES ('$firstname','$lastname',$mark)";
         $query = $connection->query($sql);

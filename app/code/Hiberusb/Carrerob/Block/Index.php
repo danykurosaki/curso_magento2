@@ -7,40 +7,49 @@ use Hiberusb\Carrerob\Model\Carrerob;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Template;
 use Hiberusb\Carrerob\Api\Data\CarreroInterfaceFactory;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Element\Template\Context;
 
 class Index extends Template{
-    protected $registry;
-    protected $curso;
-    protected $cursoRepository;
-    protected $cursoInterfaceFactory;
-    protected $cursoResource;
-    protected $scopeConfig;
+    protected Registry $registry;
+    protected Carrerob $carrerob;
+    protected CarreroRepositoryInterface $carreroRepository;
+    protected CarreroInterfaceFactory $carreroInterfaceFactory;
+    protected \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $carreroResource;
+    protected ScopeConfigInterface $scopeConfig;
 
     public function __construct(
-        \Magento\Framework\View\Element\Template\Context $context,
-        \Magento\Framework\Registry $registry,
-        Carrerob $curso,
-        CarreroRepositoryInterface $cursoRepository,
-        CarreroInterfaceFactory $cursoInterfaceFactory,
-        \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $cursoResource,
+        Context $context,
+        Registry $registry,
+        Carrerob $carrerob,
+        CarreroRepositoryInterface $carreroRepository,
+        CarreroInterfaceFactory $carreroInterfaceFactory,
+        \Hiberusb\Carrerob\Model\ResourceModel\Carrerob $carreroResource,
         array $data = [],
         ScopeConfigInterface $scopeConfig
-
     ) {
         $this->registry = $registry;
-        $this->curso = $curso;
-        $this->cursoRepository = $cursoRepository;
-        $this->cursoInterfaceFactory = $cursoInterfaceFactory;
-        $this->cursoResource = $cursoResource;
+        $this->carrerob = $carrerob;
+        $this->cursoRepository = $carreroRepository;
+        $this->cursoInterfaceFactory = $carreroInterfaceFactory;
+        $this->cursoResource = $carreroResource;
         $this->scopeConfig = $scopeConfig;
         parent::__construct($context, $data);
     }
 
+    /**
+     * @return array|null
+     */
     public function getAlumnos() {
         $pageSize=$this->scopeConfig->getValue('hiberus_proyecto/general/max_elements');
-        $collection = $this->curso->getCollection()->setPageSize($pageSize);
+        $collection = $this->carrerob->getCollection()->setPageSize($pageSize);
         return $collection->getData();
     }
+
+    /**
+     * @param $array
+     * @return float
+     */
     public function getMedia($array){
         $countMarks=count($array);
         $sumMarks=0;
@@ -50,6 +59,10 @@ class Index extends Template{
         return round($sumMarks/$countMarks,2);
     }
 
+    /**
+     * @param $array
+     * @return float
+     */
     public function getMax($array){
         $maxMark=0;
         foreach($array as $row){
@@ -59,9 +72,13 @@ class Index extends Template{
         }
         return $maxMark;
     }
+
+    /**
+     * @return array
+     */
     public function getTop(){
         $topTres = array();
-        $collection = $this->curso->getCollection()
+        $collection = $this->carrerob->getCollection()
             ->setOrder('mark','DESC')
             ->getData();
         $topTresFull = array_slice($collection, 0, 3);
